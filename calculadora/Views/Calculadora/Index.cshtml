@@ -1,4 +1,4 @@
-﻿@model calculadora.Models.CalculadoraModel
+@model calculadora.Models.CalculadoraModel
 @{
     ViewData["Title"] = "Calculadora";
 }
@@ -6,218 +6,297 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
 
-    <style>
-            *{
-              margin:0;
-              padding:0;
-              box-sizing:border-box;
-              font-family:Segoe UI, sans-serif;
-            }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Segoe UI, sans-serif;
+    }
 
-            body{
-              height:100vh;
-              display:flex;
-              justify-content:center;
-              align-items:center;
-              background:#acacac;
-            }
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#acacac;
+    }
 
-            .calculator{
-              width:350px;
-              background:#252525;
-              padding:10px;
-              border-radius:12px;
-              box-shadow:0 0 20px rgba(0,0,0,0.5);
-            }
+    .calculator{
+      width:350px;
+      background:#252525;
+      padding:10px;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(0,0,0,0.5);
+    }
 
-            .display{
-              width:100%;
-              height:90px;
-              background:#757575;
-              border:none;
-              border-radius:10px;
-              margin-bottom:10px;
-              color:white;
-              font-size:42px;
-              text-align:right;
-              padding:15px;
-              outline:none;
-            }
+    .history{
+      height:25px;
+      color:#9c9c9c;
+      font-size:18px;
+      text-align:right;
+      padding-right:5px;
+      margin-bottom:5px;
+    }
 
-            .buttons{
-              display:grid;
-              grid-template-columns:repeat(4,1fr);
-              gap:4px;
-            }
+    .display{
+      width:100%;
+      height:90px;
+      background:#757575;
+      border:none;
+      border-radius:10px;
+      margin-bottom:10px;
+      color:white;
+      font-size:42px;
+      text-align:right;
+      padding:15px;
+      outline:none;
+    }
 
-            button{
-              height:50px;
-              border:none;
-              border-radius:6px;
-              background:#333;
-              color:white;
-              font-size:24px;
-              cursor:pointer;
-              transition:0.15s;
-            }
+    .buttons{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:4px;
+    }
 
-            button:hover{
-              filter:brightness(1.1);
-            }
+    button{
+      height:50px;
+      border:none;
+      border-radius:6px;
+      background:#333;
+      color:white;
+      font-size:24px;
+      cursor:pointer;
+      transition:0.15s;
+    }
 
-            .top{
-              background:#333;
-            }
+    button:hover{
+      filter:brightness(1.1);
+    }
 
-            .operator{
-              background:#b96900;
-            }
+    .top{
+      background:#333;
+    }
 
-            .equal{
-              background:#1c64ff;
-              color:rgb(255, 255, 255);
-            }
-    </style>
+    .operator{
+      background:#b96900;
+    }
+
+    .equal{
+      background:#1c64ff;
+      color:rgb(255, 255, 255);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="calculator">
+  <div class="calculator">
 
-        @* ✅ FORMULÁRIO: envia os dados pro Controller via POST *@
-        <form id="form-calculadora" method="post" asp-action="Index">
+    @* FORMULARIO: envia os dados pro Controller via POST *@
+    <form id="form-calculadora" method="post" asp-action="Index">
 
-            @* ✅ Token de segurança obrigatório no ASP.NET *@
-            @Html.AntiForgeryToken()
+      @* Token de seguranca obrigatorio no ASP.NET *@
+      @Html.AntiForgeryToken()
 
-            @* ✅ Campos hidden: invisíveis pro usuário, preenchidos pelo JavaScript *@
-            <input type="hidden" id="campo-numero1" name="Numero1" />
-            <input type="hidden" id="campo-numero2" name="Numero2" />
-            <input type="hidden" id="campo-operador" name="Operador" />
+      @* Campos hidden: invisiveis pro usuario, preenchidos pelo JavaScript *@
+      <input type="hidden" id="campo-numero1" name="Numero1" />
+      <input type="hidden" id="campo-numero2" name="Numero2" />
+      <input type="hidden" id="campo-operador" name="Operador" />
 
-            @* ✅ Display: mostra o resultado vindo do C# ou o que o usuário está digitando *@
-            <input type="text" class="display"
-                   value="@(Model?.Resultado != null ? Model.Resultado.ToString() : "")"
-                   placeholder="0" readonly />
+      @* History: mostra a expressao que ja foi feita acima do display *@
+      <div class="history" id="history">@(Model?.Numero1 != 0 ? Model.Numero1 + " " + Model?.Operador + " =" : "")</div>
 
-            <div class="buttons">
+      @* Display: mostra o resultado vindo do C# ou o que o usuario esta digitando *@
+      <input type="text" class="display"
+             value="@(Model?.Resultado != null ? Model.Resultado.ToString() : "")"
+             placeholder="0" readonly />
 
-                <!-- Linha 1 -->
-                <button type="button" class="top" onclick="clicarC()">%</button>
-                <button type="button" class="top" onclick="clicarC()">CE</button>
-                <button type="button" class="top" onclick="clicarC()">C</button>
-                <button type="button" class="top" onclick="clicarBackspace()">⌫</button>
+      <div class="buttons">
 
-                <!-- Linha 2 -->
-                <button type="button" class="top">⅟x</button>
-                <button type="button" class="top">x²</button>
-                <button type="button" class="top">²√x</button>
-                <button type="button" class="operator" onclick="clicarOperador('/')">÷</button>
+        <!-- Linha 1 -->
+        <button type="button" class="top" onclick="porcentagem()">%</button>
+        <button type="button" class="top" onclick="clicarC()">CE</button>
+        <button type="button" class="top" onclick="clicarC()">C</button>
+        <button type="button" class="top" onclick="clicarBackspace()">&#x232B;</button>
 
-                <!-- Linha 3 -->
-                <button type="button" onclick="clicarNumero('7')">7</button>
-                <button type="button" onclick="clicarNumero('8')">8</button>
-                <button type="button" onclick="clicarNumero('9')">9</button>
-                <button type="button" class="operator" onclick="clicarOperador('*')">×</button>
+        <!-- Linha 2 -->
+        <button type="button" class="top" onclick="inverso()">&#x215F;x</button>
+        <button type="button" class="top" onclick="quadrado()">x&#xB2;</button>
+        <button type="button" class="top" onclick="raiz()">&#xB2;&#x221A;x</button>
+        <button type="button" class="operator" onclick="clicarOperador('/')">&#xF7;</button>
 
-                <!-- Linha 4 -->
-                <button type="button" onclick="clicarNumero('4')">4</button>
-                <button type="button" onclick="clicarNumero('5')">5</button>
-                <button type="button" onclick="clicarNumero('6')">6</button>
-                <button type="button" class="operator" onclick="clicarOperador('-')">−</button>
+        <!-- Linha 3 -->
+        <button type="button" onclick="clicarNumero('7')">7</button>
+        <button type="button" onclick="clicarNumero('8')">8</button>
+        <button type="button" onclick="clicarNumero('9')">9</button>
+        <button type="button" class="operator" onclick="clicarOperador('*')">&#xD7;</button>
 
-                <!-- Linha 5 -->
-                <button type="button" onclick="clicarNumero('1')">1</button>
-                <button type="button" onclick="clicarNumero('2')">2</button>
-                <button type="button" onclick="clicarNumero('3')">3</button>
-                <button type="button" class="operator" onclick="clicarOperador('+')">+</button>
+        <!-- Linha 4 -->
+        <button type="button" onclick="clicarNumero('4')">4</button>
+        <button type="button" onclick="clicarNumero('5')">5</button>
+        <button type="button" onclick="clicarNumero('6')">6</button>
+        <button type="button" class="operator" onclick="clicarOperador('-')">&#x2212;</button>
 
-                <!-- Linha 6 -->
-                <button type="button">+/-</button>
-                <button type="button" onclick="clicarNumero('0')">0</button>
-                <button type="button">.</button>
-                <button type="button" class="equal" onclick="clicarIgual()">=</button>
+        <!-- Linha 5 -->
+        <button type="button" onclick="clicarNumero('1')">1</button>
+        <button type="button" onclick="clicarNumero('2')">2</button>
+        <button type="button" onclick="clicarNumero('3')">3</button>
+        <button type="button" class="operator" onclick="clicarOperador('+')">+</button>
 
-            </div>
-        </form>
+        <!-- Linha 6 -->
+        <button type="button" onclick="inverterSinal()">+/-</button>
+        <button type="button" onclick="clicarNumero('0')">0</button>
+        <button type="button" onclick="clicarNumero('.')">.</button>
+        <button type="button" class="equal" onclick="clicarIgual()">=</button>
 
-    </div>
+      </div>
+    </form>
 
-    <script>
-            let numero1 = '';
-            let numero2 = '';
-            let operador = '';
-            let digitandoSegundo = false;
-            let resultadoAtual = false;
+  </div>
 
-            // ✅ Se já veio um resultado do servidor, carrega ele no estado
-            window.onload = function () {
-                const valorDisplay = document.querySelector('.display').value;
-                if (valorDisplay !== '') {
-                    numero1 = valorDisplay;
-                    resultadoAtual = true;
-                }
-            };
+  <script>
+    let numero1 = '';
+    let numero2 = '';
+    let operador = '';
+    let operadorDisplay = '';
+    let digitandoSegundo = false;
+    let resultadoAtual = false;
 
-            function atualizarDisplay(valor) {
-                document.querySelector('.display').value = valor || '0';
-            }
+    const historyEl = document.getElementById('history');
 
-            function clicarNumero(num) {
-                if (resultadoAtual) {
-                    numero1 = num;
-                    numero2 = '';
-                    operador = '';
-                    digitandoSegundo = false;
-                    resultadoAtual = false;
-                    atualizarDisplay(numero1);
-                    return;
-                }
-                if (!digitandoSegundo) {
-                    numero1 += num;
-                    atualizarDisplay(numero1);
-                } else {
-                    numero2 += num;
-                    atualizarDisplay(numero2);
-                }
-            }
+    // Se ja veio um resultado do servidor, carrega ele no estado
+    window.onload = function () {
+        const valorDisplay = document.querySelector('.display').value;
+        if (valorDisplay !== '') {
+            numero1 = valorDisplay;
+            resultadoAtual = true;
+        }
+    };
 
-            function clicarOperador(op) {
-                if (numero1 === '') return;
-                operador = op;
-                digitandoSegundo = true;
-                resultadoAtual = false;
-            }
+    function atualizarDisplay(valor) {
+        document.querySelector('.display').value = valor || '0';
+    }
 
-            function clicarIgual() {
-                if (numero1 === '' || numero2 === '' || operador === '') return;
+    function atualizarHistory() {
+        if (operador === '') {
+            historyEl.innerText = '';
+        } else if (!digitandoSegundo) {
+            historyEl.innerText = numero1 + ' ' + operadorDisplay;
+        } else {
+            historyEl.innerText = numero1 + ' ' + operadorDisplay + ' ' + numero2;
+        }
+    }
 
-                // ✅ Preenche os campos hidden antes de submeter
-                document.getElementById('campo-numero1').value = numero1;
-                document.getElementById('campo-numero2').value = numero2;
-                document.getElementById('campo-operador').value = operador;
-                document.getElementById('form-calculadora').submit();
-            }
+    function clicarNumero(num) {
+        if (resultadoAtual) {
+            numero1 = num;
+            numero2 = '';
+            operador = '';
+            operadorDisplay = '';
+            digitandoSegundo = false;
+            resultadoAtual = false;
+            atualizarDisplay(numero1);
+            atualizarHistory();
+            return;
+        }
+        if (!digitandoSegundo) {
+            numero1 += num;
+            atualizarDisplay(numero1);
+        } else {
+            numero2 += num;
+            atualizarDisplay(numero2);
+        }
+        atualizarHistory();
+    }
 
-            function clicarC() {
-                numero1 = ''; numero2 = ''; operador = '';
-                digitandoSegundo = false; resultadoAtual = false;
-                atualizarDisplay('0');
-            }
+    function clicarOperador(op) {
+        if (numero1 === '') return;
+        operador = op;
+        const simbolos = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+        operadorDisplay = simbolos[op] || op;
+        digitandoSegundo = true;
+        resultadoAtual = false;
+        atualizarDisplay(numero1);
+        atualizarHistory();
+    }
 
-            function clicarBackspace() {
-                if (!digitandoSegundo) {
-                    numero1 = numero1.slice(0, -1);
-                    atualizarDisplay(numero1);
-                } else {
-                    numero2 = numero2.slice(0, -1);
-                    atualizarDisplay(numero2);
-                }
-            }
-    </script>
+    function clicarIgual() {
+        if (numero1 === '' || numero2 === '' || operador === '') return;
+
+        historyEl.innerText = numero1 + ' ' + operadorDisplay + ' ' + numero2 + ' =';
+
+        // Preenche os campos hidden antes de submeter
+        document.getElementById('campo-numero1').value = numero1;
+        document.getElementById('campo-numero2').value = numero2;
+        document.getElementById('campo-operador').value = operador;
+        document.getElementById('form-calculadora').submit();
+    }
+
+    function clicarC() {
+        numero1 = ''; numero2 = ''; operador = ''; operadorDisplay = '';
+        digitandoSegundo = false; resultadoAtual = false;
+        atualizarDisplay('0');
+        historyEl.innerText = '';
+    }
+
+    function clicarBackspace() {
+        if (!digitandoSegundo) {
+            numero1 = numero1.slice(0, -1);
+            atualizarDisplay(numero1);
+        } else {
+            numero2 = numero2.slice(0, -1);
+            atualizarDisplay(numero2);
+        }
+        atualizarHistory();
+    }
+
+    function porcentagem() {
+        if (numero1 !== '') {
+            numero1 = String(parseFloat(numero1) / 100);
+            atualizarDisplay(numero1);
+            atualizarHistory();
+        }
+    }
+
+    function quadrado() {
+        if (numero1 !== '') {
+            numero1 = String(Math.pow(parseFloat(numero1), 2));
+            atualizarDisplay(numero1);
+            resultadoAtual = true;
+            atualizarHistory();
+        }
+    }
+
+    function raiz() {
+        if (numero1 !== '') {
+            numero1 = String(Math.sqrt(parseFloat(numero1)));
+            atualizarDisplay(numero1);
+            resultadoAtual = true;
+            atualizarHistory();
+        }
+    }
+
+    function inverso() {
+        if (numero1 !== '') {
+            numero1 = String(1 / parseFloat(numero1));
+            atualizarDisplay(numero1);
+            resultadoAtual = true;
+            atualizarHistory();
+        }
+    }
+
+    function inverterSinal() {
+        if (numero1 !== '') {
+            numero1 = String(parseFloat(numero1) * -1);
+            atualizarDisplay(numero1);
+            atualizarHistory();
+        }
+    }
+  </script>
 
 </body>
 </html>
