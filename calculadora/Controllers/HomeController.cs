@@ -8,7 +8,7 @@ namespace calculadora.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Calculadora"); ;
         }
 
         public IActionResult Privacy()

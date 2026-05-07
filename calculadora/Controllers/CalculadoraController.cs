@@ -9,7 +9,7 @@ namespace calculadora.Controllers
         public IActionResult Index()
         {
             //fala pro asp.net para mostrar a tela html pro usuario
-            return View();
+            return View(new CalculadoraModel());
         }
 
         // diz que a acao so rodaa quando o usuario clicar no botao de calcular
