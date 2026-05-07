@@ -1,8 +1,223 @@
-﻿<!-- html normal-->
-@model calculadora.Models.CalculadoraModel
-
+﻿@model calculadora.Models.CalculadoraModel
 @{
     ViewData["Title"] = "Calculadora";
 }
 
-<h1>Calculadora</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+    <style>
+            *{
+              margin:0;
+              padding:0;
+              box-sizing:border-box;
+              font-family:Segoe UI, sans-serif;
+            }
+
+            body{
+              height:100vh;
+              display:flex;
+              justify-content:center;
+              align-items:center;
+              background:#acacac;
+            }
+
+            .calculator{
+              width:350px;
+              background:#252525;
+              padding:10px;
+              border-radius:12px;
+              box-shadow:0 0 20px rgba(0,0,0,0.5);
+            }
+
+            .display{
+              width:100%;
+              height:90px;
+              background:#757575;
+              border:none;
+              border-radius:10px;
+              margin-bottom:10px;
+              color:white;
+              font-size:42px;
+              text-align:right;
+              padding:15px;
+              outline:none;
+            }
+
+            .buttons{
+              display:grid;
+              grid-template-columns:repeat(4,1fr);
+              gap:4px;
+            }
+
+            button{
+              height:50px;
+              border:none;
+              border-radius:6px;
+              background:#333;
+              color:white;
+              font-size:24px;
+              cursor:pointer;
+              transition:0.15s;
+            }
+
+            button:hover{
+              filter:brightness(1.1);
+            }
+
+            .top{
+              background:#333;
+            }
+
+            .operator{
+              background:#b96900;
+            }
+
+            .equal{
+              background:#1c64ff;
+              color:rgb(255, 255, 255);
+            }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+
+        @* ✅ FORMULÁRIO: envia os dados pro Controller via POST *@
+        <form id="form-calculadora" method="post" asp-action="Index">
+
+            @* ✅ Token de segurança obrigatório no ASP.NET *@
+            @Html.AntiForgeryToken()
+
+            @* ✅ Campos hidden: invisíveis pro usuário, preenchidos pelo JavaScript *@
+            <input type="hidden" id="campo-numero1" name="Numero1" />
+            <input type="hidden" id="campo-numero2" name="Numero2" />
+            <input type="hidden" id="campo-operador" name="Operador" />
+
+            @* ✅ Display: mostra o resultado vindo do C# ou o que o usuário está digitando *@
+            <input type="text" class="display"
+                   value="@(Model?.Resultado != null ? Model.Resultado.ToString() : "")"
+                   placeholder="0" readonly />
+
+            <div class="buttons">
+
+                <!-- Linha 1 -->
+                <button type="button" class="top" onclick="clicarC()">%</button>
+                <button type="button" class="top" onclick="clicarC()">CE</button>
+                <button type="button" class="top" onclick="clicarC()">C</button>
+                <button type="button" class="top" onclick="clicarBackspace()">⌫</button>
+
+                <!-- Linha 2 -->
+                <button type="button" class="top">⅟x</button>
+                <button type="button" class="top">x²</button>
+                <button type="button" class="top">²√x</button>
+                <button type="button" class="operator" onclick="clicarOperador('/')">÷</button>
+
+                <!-- Linha 3 -->
+                <button type="button" onclick="clicarNumero('7')">7</button>
+                <button type="button" onclick="clicarNumero('8')">8</button>
+                <button type="button" onclick="clicarNumero('9')">9</button>
+                <button type="button" class="operator" onclick="clicarOperador('*')">×</button>
+
+                <!-- Linha 4 -->
+                <button type="button" onclick="clicarNumero('4')">4</button>
+                <button type="button" onclick="clicarNumero('5')">5</button>
+                <button type="button" onclick="clicarNumero('6')">6</button>
+                <button type="button" class="operator" onclick="clicarOperador('-')">−</button>
+
+                <!-- Linha 5 -->
+                <button type="button" onclick="clicarNumero('1')">1</button>
+                <button type="button" onclick="clicarNumero('2')">2</button>
+                <button type="button" onclick="clicarNumero('3')">3</button>
+                <button type="button" class="operator" onclick="clicarOperador('+')">+</button>
+
+                <!-- Linha 6 -->
+                <button type="button">+/-</button>
+                <button type="button" onclick="clicarNumero('0')">0</button>
+                <button type="button">.</button>
+                <button type="button" class="equal" onclick="clicarIgual()">=</button>
+
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+            let numero1 = '';
+            let numero2 = '';
+            let operador = '';
+            let digitandoSegundo = false;
+            let resultadoAtual = false;
+
+            // ✅ Se já veio um resultado do servidor, carrega ele no estado
+            window.onload = function () {
+                const valorDisplay = document.querySelector('.display').value;
+                if (valorDisplay !== '') {
+                    numero1 = valorDisplay;
+                    resultadoAtual = true;
+                }
+            };
+
+            function atualizarDisplay(valor) {
+                document.querySelector('.display').value = valor || '0';
+            }
+
+            function clicarNumero(num) {
+                if (resultadoAtual) {
+                    numero1 = num;
+                    numero2 = '';
+                    operador = '';
+                    digitandoSegundo = false;
+                    resultadoAtual = false;
+                    atualizarDisplay(numero1);
+                    return;
+                }
+                if (!digitandoSegundo) {
+                    numero1 += num;
+                    atualizarDisplay(numero1);
+                } else {
+                    numero2 += num;
+                    atualizarDisplay(numero2);
+                }
+            }
+
+            function clicarOperador(op) {
+                if (numero1 === '') return;
+                operador = op;
+                digitandoSegundo = true;
+                resultadoAtual = false;
+            }
+
+            function clicarIgual() {
+                if (numero1 === '' || numero2 === '' || operador === '') return;
+
+                // ✅ Preenche os campos hidden antes de submeter
+                document.getElementById('campo-numero1').value = numero1;
+                document.getElementById('campo-numero2').value = numero2;
+                document.getElementById('campo-operador').value = operador;
+                document.getElementById('form-calculadora').submit();
+            }
+
+            function clicarC() {
+                numero1 = ''; numero2 = ''; operador = '';
+                digitandoSegundo = false; resultadoAtual = false;
+                atualizarDisplay('0');
+            }
+
+            function clicarBackspace() {
+                if (!digitandoSegundo) {
+                    numero1 = numero1.slice(0, -1);
+                    atualizarDisplay(numero1);
+                } else {
+                    numero2 = numero2.slice(0, -1);
+                    atualizarDisplay(numero2);
+                }
+            }
+    </script>
+
+</body>
+</html>
