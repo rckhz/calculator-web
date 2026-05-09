@@ -1,6 +1,6 @@
 ﻿//onde recebe os numeros para os calculos
 
-namespace calculadora.Models
+namespace clCalculadora
 {
     public class CalculadoraModel
     {
@@ -37,6 +37,6 @@ namespace calculadora.Models
             };
             FoiCalculado = true;
         }
-        
+
     }
 }

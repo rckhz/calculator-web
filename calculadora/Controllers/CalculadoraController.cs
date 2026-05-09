@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using calculadora.Models;
+using clCalculadora;
 
 namespace calculadora.Controllers
 {

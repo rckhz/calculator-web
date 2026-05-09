@@ -97,3 +97,4 @@ C:\saves\calculadora\calculadora\obj\Debug\net10.0\refint\calculadora.dll
 C:\saves\calculadora\calculadora\obj\Debug\net10.0\calculadora.pdb
 C:\saves\calculadora\calculadora\obj\Debug\net10.0\calculadora.genruntimeconfig.cache
 C:\saves\calculadora\calculadora\obj\Debug\net10.0\ref\calculadora.dll
+C:\saves\calculadora\calculadora\obj\Debug\net10.0\calculadora.csproj.AssemblyReference.cache
