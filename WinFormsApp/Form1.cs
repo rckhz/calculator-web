@@ -9,6 +9,57 @@ namespace WinFormsApp
         public Form1()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+
+            // Fundo geral
+            this.BackColor = ColorTranslator.FromHtml("#2D2D2D");
+
+            // Display
+            txtDisplay.BackColor = ColorTranslator.FromHtml("#4A4A4A");
+            txtDisplay.ForeColor = Color.White;
+            txtDisplay.BorderStyle = BorderStyle.None;
+
+            // Historico
+            lblHistorico.BackColor = ColorTranslator.FromHtml("#4A4A4A");
+            lblHistorico.ForeColor = Color.White;
+
+            // Cores
+            Color corNumeros = ColorTranslator.FromHtml("#3D3D3D");
+            Color corEspeciais = ColorTranslator.FromHtml("#454545");
+            Color corOperadores = ColorTranslator.FromHtml("#D07A20");
+            Color corIgual = ColorTranslator.FromHtml("#4A90D9");
+            Color corTexto = Color.White;
+
+            // Números
+            btn0.BackColor = btn1.BackColor = btn2.BackColor = btn3.BackColor =
+            btn4.BackColor = btn5.BackColor = btn6.BackColor = btn7.BackColor =
+            btn8.BackColor = btn9.BackColor = corNumeros;
+
+            // Especiais
+            btnPorcentagem.BackColor = btnCE.BackColor = btnC.BackColor =
+            btnDelete.BackColor = btnFracao.BackColor = btnQuadrado.BackColor =
+            btnRaiz.BackColor = btnInversao.BackColor = btnPonto.BackColor = corEspeciais;
+
+            // Operadores
+            btnSoma.BackColor = btnSubtracao.BackColor =
+            btnMultiplicacao.BackColor = btnDivisao.BackColor = corOperadores;
+
+            // Igual
+            btnIgual.BackColor = corIgual;
+
+            // Texto branco em todos os botões
+            foreach (Control c in this.Controls)
+            {
+                if (c is Button b)
+                {
+                    b.ForeColor = corTexto;
+                    b.FlatStyle = FlatStyle.Flat;
+                    b.FlatAppearance.BorderSize = 0;
+                }
+            }
         }
         private void txtDisplay_TextChanged(object sender, EventArgs e)
         {

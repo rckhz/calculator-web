@@ -320,7 +320,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(253, 311);
+            ClientSize = new Size(242, 302);
             Controls.Add(lblHistorico);
             Controls.Add(btnIgual);
             Controls.Add(btnPonto);

@@ -27,23 +27,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\luisd\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\saves\\calculadora\\WinFormsApp\\WinFormsApp.csproj",
+      "projectUniqueName": "C:\\all\\calculator-web\\WinFormsApp\\WinFormsApp.csproj",
       "projectName": "WinFormsApp",
-      "projectPath": "C:\\saves\\calculadora\\WinFormsApp\\WinFormsApp.csproj",
-      "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\saves\\calculadora\\WinFormsApp\\obj\\",
+      "projectPath": "C:\\all\\calculator-web\\WinFormsApp\\WinFormsApp.csproj",
+      "packagesPath": "C:\\Users\\luisd\\.nuget\\packages\\",
+      "outputPath": "C:\\all\\calculator-web\\WinFormsApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\luisd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -52,6 +52,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -59,8 +60,8 @@
           "framework": "net10.0-windows7.0",
           "targetAlias": "net10.0-windows",
           "projectReferences": {
-            "C:\\saves\\calculadora\\clCalculadora\\clCalculadora.csproj": {
-              "projectPath": "C:\\saves\\calculadora\\clCalculadora\\clCalculadora.csproj"
+            "C:\\all\\calculator-web\\clCalculadora\\clCalculadora.csproj": {
+              "projectPath": "C:\\all\\calculator-web\\clCalculadora\\clCalculadora.csproj"
             }
           }
         }
