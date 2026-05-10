@@ -224,7 +224,11 @@ namespace WinFormsApp
         }
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            
+
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
             //pega o segundo numero e guard daa no model
             _model.Numero2 = double.Parse(txtDisplay.Text);
             
@@ -249,10 +253,15 @@ namespace WinFormsApp
             //limpa o historico
             lblHistorico.Text = "";
 
+
         }
 
         private void btnInversao_Click(object sender, EventArgs e)
         {
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
             if (txtDisplay.Text != "" && txtDisplay.Text != "0")
             {
                 double numero = double.Parse(txtDisplay.Text);
@@ -296,6 +305,10 @@ namespace WinFormsApp
         //especiais
         private void btnPorcentagem_Click(object sender, EventArgs e)
         {
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
             _model.Numero1 = double.Parse(txtDisplay.Text);
             _model.TipoCalculo = "porcentagem";
             _model.CalcularEspecial();
@@ -304,6 +317,11 @@ namespace WinFormsApp
 
         private void btnFracao_Click(object sender, EventArgs e)
         {
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
+
             _model.Numero1 = double.Parse(txtDisplay.Text);
             _model.TipoCalculo = "inverso";
             _model.CalcularEspecial();
@@ -311,6 +329,10 @@ namespace WinFormsApp
         }
         private void btnQuadrado_Click(object sender, EventArgs e)
         {
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
             _model.Numero1 = double.Parse(txtDisplay.Text);
             _model.TipoCalculo = "quadrado";
             _model.CalcularEspecial();
@@ -319,6 +341,10 @@ namespace WinFormsApp
 
         private void btnRaiz_Click(object sender, EventArgs e)
         {
+            if (txtDisplay.Text == "")
+            {
+                return;
+            }
             _model.Numero1 = double.Parse(txtDisplay.Text);
             _model.TipoCalculo = "raiz";
             _model.CalcularEspecial();
