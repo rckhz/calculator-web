@@ -26,17 +26,17 @@
               ColumnDefinitions="*,*,*,*"
               RowSpacing="4"
               ColumnSpacing="4">
-
+    
             <!-- Linha 1 -->
-            <Button Grid.Row="0" Grid.Column="0" Text="%" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
-            <Button Grid.Row="0" Grid.Column="1" Text="CE" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
-            <Button Grid.Row="0" Grid.Column="2" Text="C" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
-            <Button Grid.Row="0" Grid.Column="3" Text="⌫" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
+            <!--<Button Grid.Row="0" Grid.Column="0" Text="%" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/
+                <Button Grid.Row="0" Grid.Column="1" Text="CE" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/
+                <Button Grid.Row="0" Grid.Column="2" Text="C" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/
+                <Button Grid.Row="0" Grid.Column="3" Text="⌫" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>-->
 
             <!-- Linha 2 -->
-            <Button Grid.Row="1" Grid.Column="0" Text="¹/x" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
-            <Button Grid.Row="1" Grid.Column="1" Text="x²" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
-            <Button Grid.Row="1" Grid.Column="2" Text="²√x" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
+            <Button Grid.Row="1" Grid.Column="0" Text="⌫" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
+            <Button Grid.Row="1" Grid.Column="1" Text="AC" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
+            <Button Grid.Row="1" Grid.Column="2" Text="%" BackgroundColor="#333" TextColor="White" Clicked="OnBtnClicked"/>
             <Button Grid.Row="1" Grid.Column="3" Text="÷" BackgroundColor="#b96900" TextColor="White" Clicked="OnBtnClicked"/>
 
             <!-- Linha 3 -->
