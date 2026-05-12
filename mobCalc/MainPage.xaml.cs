@@ -21,41 +21,73 @@ namespace mobCalc
             // NÚMEROS
             if ("0123456789".Contains(texto))
             {
-                // lógica dos números
+                if (_acabouDeCalcular)
+                {
+                    lblDisplay.Text = texto;
+                    _acabouDeCalcular = false;
+                }
+                if (lblDisplay.Text == "0")
+                {
+                    lblDisplay.Text = texto;
+                }
+                else
+                {
+                    lblDisplay.Text += texto;
+                }
             }
             // OPERADORES
             else if (texto == "+" || texto == "−" || texto == "×" || texto == "÷")
             {
-                // lógica dos operadores
+                if (lblDisplay.Text == "") return;
+
+                if (_digitandoSegundo)
+                {
+                    _model.Numero2 = double.Parse(lblDisplay.Text);
+                    _model.Calcular();
+                    lblDisplay.Text = _model.Resultado.ToString();
+                }
+
+                _model.Numero1 = double.Parse(lblDisplay.Text);
+                _model.Operador = texto == "×" ? "*" : texto == "÷" ? "/" : texto == "−" ? "-" : "+";
+                _digitandoSegundo = true;
+                lblHistorico.Text = _model.Numero1 + " " + texto;
+                lblDisplay.Text = "";
             }
             // IGUAL
             else if (texto == "=")
             {
-                // lógica do igual
+                if (lblDisplay.Text == "" || !_digitandoSegundo) return;
+
+                _model.Numero2 = double.Parse(lblDisplay.Text);
+                lblHistorico.Text = _model.Numero1 + " " + _model.Operador + " " + _model.Numero2 + " =";
+                _model.Calcular();
+                lblDisplay.Text = _model.Resultado.ToString();
+                _digitandoSegundo = false;
+                _acabouDeCalcular = true;
+                _model = new CalculadoraModel();
             }
             // LIMPAR
-            else if (texto == "C")
+            else if (texto == "AC")
             {
-                // lógica do C
-            }
-            else if (texto == "CE")
-            {
-                // lógica do CE
+                _model = new CalculadoraModel();
+                _digitandoSegundo = false;
+                _acabouDeCalcular = false;
+                lblDisplay.Text = "0";
+                lblHistorico.Text = "";
             }
             // BACKSPACE
             else if (texto == "⌫")
             {
-                // lógica do backspace
+                if (lblDisplay.Text.Length > 1)
+                    lblDisplay.Text = lblDisplay.Text.Substring(0, lblDisplay.Text.Length - 1);
+                else
+                    lblDisplay.Text = "0";
             }
             // PONTO
             else if (texto == ".")
             {
-                // lógica do ponto
-            }
-            // ESPECIAIS
-            else if (texto == "%" || texto == "x²" || texto == "²√x" || texto == "¹/x" || texto == "+/-")
-            {
-                // lógica dos especiais
+                if (!lblDisplay.Text.Contains("."))
+                    lblDisplay.Text += ".";
             }
         }
     }
