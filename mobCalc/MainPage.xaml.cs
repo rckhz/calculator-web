@@ -57,7 +57,7 @@ namespace mobCalc
             else if (texto == "=")
             {
                 // easter egg - antes do return
-                if (lblDisplay.Text == "013")
+                if (lblDisplay.Text == "3")
                 {
                     lblDisplay.Text = "blassdadada";
                     return;
