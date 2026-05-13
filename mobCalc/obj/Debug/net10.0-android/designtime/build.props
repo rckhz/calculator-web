@@ -26,5 +26,5 @@ androidpackagenamingpolicy=lowercasecrc64
 _nugetassetsfilehash=8e0c41cf2d38bb9a078e1495eba2affd19a6525fc590e5701d71f1ab1fd4b333
 typemapkind=strings-asm
 androidmanifestplaceholders=
-projectfullpath=c:\saves\calculadora\mobcalc\mobcalc.csproj
+projectfullpath=c:\all\calculator-web\mobcalc\mobcalc.csproj
 androidusedesignerassembly=true
