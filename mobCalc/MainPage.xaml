@@ -13,12 +13,19 @@
                    TextColor="#9c9c9c" 
                    FontSize="33"
                    HorizontalTextAlignment="End"/>
-            <Label x:Name="lblDisplay" 
-                   Text="0" 
-                   TextColor="White" 
-                   FontSize="70"
-                   FontAttributes="None"
-                   HorizontalTextAlignment="End"/>
+            <ScrollView Orientation="Horizontal" 
+            HorizontalScrollBarVisibility="Never"
+            HorizontalOptions="Fill">
+                <Label x:Name="lblDisplay" 
+       Text="0" 
+       TextColor="White" 
+       FontSize="70"
+       FontAttributes="Bold"
+       HorizontalTextAlignment="End"
+       HorizontalOptions="EndAndExpand"
+       LineBreakMode="NoWrap"
+       MaxLines="1"/>
+            </ScrollView>
         </VerticalStackLayout>
 
         <!-- Botões -->
@@ -30,98 +37,93 @@
 
             <!-- Linha 1 -->
             <Button Grid.Row="0" Grid.Column="0" Text="⌫"
-                    BackgroundColor="#A5A5A5" TextColor="Black"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    BackgroundColor="#828282" TextColor="#fff"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="0" Grid.Column="1" Text="AC"
-                    BackgroundColor="#A5A5A5" TextColor="Black"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    BackgroundColor="#828282" TextColor="#fff"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="0" Grid.Column="2" Text="%"
-                    BackgroundColor="#A5A5A5" TextColor="Black"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    BackgroundColor="#828282" TextColor="#fff"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="0" Grid.Column="3" Text="÷"
-                    BackgroundColor="#FF9F0A" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
-
+                    BackgroundColor="#ff9d00" TextColor="White"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
 
             <!-- Linha 2 -->
             <Button Grid.Row="1" Grid.Column="0" Text="7"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="1" Grid.Column="1" Text="8"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="1" Grid.Column="2" Text="9"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="1" Grid.Column="3" Text="×"
-                    BackgroundColor="#FF9F0A" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    BackgroundColor="#ff9d00" TextColor="White"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
 
             <!-- Linha 3 -->
             <Button Grid.Row="2" Grid.Column="0" Text="4"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="2" Grid.Column="1" Text="5"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="2" Grid.Column="2" Text="6"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="2" Grid.Column="3" Text="−"
-                    BackgroundColor="#FF9F0A" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    BackgroundColor="#ff9d00" TextColor="White"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
 
             <!-- Linha 4 -->
             <Button Grid.Row="3" Grid.Column="0" Text="1"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="3" Grid.Column="1" Text="2"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="3" Grid.Column="2" Text="3"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="3" Grid.Column="3" Text="+"
-                    BackgroundColor="#FF9F0A" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
-
+                    BackgroundColor="#ff9d00" TextColor="White"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
 
             <!-- Linha 5 -->
             <Button Grid.Row="4" Grid.Column="0" Text="+/-"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="4" Grid.Column="1" Text="0"
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="4" Grid.Column="2" Text="."
                     BackgroundColor="#333333" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="36" FontAttributes="Bold" Clicked="OnBtnClicked"/>
             <Button Grid.Row="4" Grid.Column="3" Text="="
-                    BackgroundColor="#FF9F0A" TextColor="White"
-                    CornerRadius="50" HeightRequest="80"
-                    FontSize="36" Clicked="OnBtnClicked"/>
-
+                    BackgroundColor="#ff9d00" TextColor="White"
+                    CornerRadius="60" HeightRequest="80"
+                    FontSize="44" FontAttributes="Bold" Clicked="OnBtnClicked"/>
         </Grid>
-        
     </Grid>
-
 </ContentPage>

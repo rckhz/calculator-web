@@ -1,0 +1,8 @@
+<api type="release" assembly-name="mobCalc" mvid="14ffb87d14184b4aac2da5d596af0ee4">
+  <module assembly-name="mobCalc" mvid="14ffb87d14184b4aac2da5d596af0ee4" mvid-bytes="fbj/FBgUSkusLaXVlq8O5A==">
+    <types-scratch>
+      <entry key="crc64e634f716dab927d7/MainActivity" java-name="crc64e634f716dab927d7/MainActivity" managed-type-name="mobCalc.MainActivity" token="33554451" />
+      <entry key="crc64e634f716dab927d7/MainApplication" java-name="crc64e634f716dab927d7/MainApplication" managed-type-name="mobCalc.MainApplication" token="33554452" />
+    </types-scratch>
+  </module>
+</api>

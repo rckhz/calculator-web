@@ -1,0 +1,15 @@
+<api>
+  <jcw-types>
+    <type name="MainActivity" package="crc64e634f716dab927d7" application_java_class="android.app.Application" mono_runtime_initialization="mono.MonoPackageManager.LoadApplication (context);" extends_type="crc6488302ad6e9e4df1a.MauiAppCompatActivity" partial_assembly_qualified_name="mobCalc.MainActivity, mobCalc">
+      <constructors>
+        <constructor name="MainActivity" method="n_.ctor:()V:" jni_signature="()V" managed_parameters="" retval="void" is_dynamically_registered="True" />
+        <constructor name="MainActivity" method="n_.ctor:(I)V:" jni_signature="(I)V" managed_parameters="System.Int32, System.Private.CoreLib" params="int p0" retval="void" is_dynamically_registered="True" super_call="p0" activate_call="p0" />
+      </constructors>
+    </type>
+    <type name="MainApplication" package="crc64e634f716dab927d7" application_java_class="android.app.Application" mono_runtime_initialization="mono.MonoPackageManager.LoadApplication (context);" extends_type="crc6488302ad6e9e4df1a.MauiApplication" is_application="True" partial_assembly_qualified_name="mobCalc.MainApplication, mobCalc" application_constructor="MainApplication" />
+  </jcw-types>
+  <acw-types partial-assembly-name="mobCalc" module-name="mobCalc.dll">
+    <type assembly-qualified-name="mobCalc.MainActivity, mobCalc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" compat-jni-name="mobcalc.MainActivity" java-key="crc64e634f716dab927d7.MainActivity" managed-key="mobCalc.MainActivity" partial-assembly-qualified-name="mobCalc.MainActivity, mobCalc" />
+    <type assembly-qualified-name="mobCalc.MainApplication, mobCalc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" compat-jni-name="mobcalc.MainApplication" java-key="crc64e634f716dab927d7.MainApplication" managed-key="mobCalc.MainApplication" partial-assembly-qualified-name="mobCalc.MainApplication, mobCalc" />
+  </acw-types>
+</api>

@@ -1,0 +1,4 @@
+C:\saves\calculadora\mobCalc\bin\Release\net10.0-android\publish\com.companyname.mobcalc-Signed.aab
+C:\saves\calculadora\mobCalc\bin\Release\net10.0-android\publish\com.companyname.mobcalc.aab
+C:\saves\calculadora\mobCalc\bin\Release\net10.0-android\publish\com.companyname.mobcalc-Signed.apk
+C:\saves\calculadora\mobCalc\bin\Release\net10.0-android\publish\_Microsoft.Android.Resource.Designer.dll

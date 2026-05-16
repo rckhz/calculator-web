@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="mobCalc" mvid="0369df22197943538030009448db92dc">
+<api type="debug" assembly-name="mobCalc" mvid="b5194a96ad5441b09c54af7ea926834f">
   <java-to-managed>
     <entry java-name="crc64e634f716dab927d7/MainActivity" managed-name="mobCalc.MainActivity, mobCalc" managed-type-token-id="33554452" />
     <entry java-name="crc64e634f716dab927d7/MainApplication" managed-name="mobCalc.MainApplication, mobCalc" managed-type-token-id="33554453" />

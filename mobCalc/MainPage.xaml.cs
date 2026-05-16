@@ -13,64 +13,108 @@ namespace mobCalc
             InitializeComponent();
         }
 
+        private void AjustarFonte()
+        {
+            int tamanho = lblDisplay.Text.Length;
+
+            if (tamanho <= 6)
+                lblDisplay.FontSize = 70;
+            
+            else if (tamanho <= 10)
+                lblDisplay.FontSize = 55;
+            
+            else if (tamanho <= 15)
+                lblDisplay.FontSize = 40;
+            
+            else if (tamanho <= 20)
+                lblDisplay.FontSize = 30;
+            
+            else
+                lblDisplay.FontSize = 24;
+        }
+        private double _ultimoNumero1 = 0;
         private void OnBtnClicked(object sender, EventArgs e)
         {
             var btn = (Button)sender;
             string texto = btn.Text;
 
-            // NÚMEROS
             if ("0123456789".Contains(texto))
             {
+                // Limite de 15 dígitos
+                string apenasNumeros = new string(lblDisplay.Text.Where(char.IsDigit).ToArray());
+
+                if (apenasNumeros.Length >= 15)
+                    return;
+
                 if (_acabouDeCalcular)
                 {
                     lblDisplay.Text = texto;
+                    AjustarFonte();
                     _acabouDeCalcular = false;
                     return;
                 }
+
                 if (lblDisplay.Text == "0")
+                {
                     lblDisplay.Text = texto;
+                }
+                
                 else
+                {
                     lblDisplay.Text += texto;
+                }
+
+                AjustarFonte(); 
             }
-            // OPERADORES
             else if (texto == "+" || texto == "−" || texto == "×" || texto == "÷")
             {
                 if (lblDisplay.Text == "") return;
 
-                if (_digitandoSegundo)
-                {
-                    _model.Numero2 = double.Parse(lblDisplay.Text);
-                    _model.Calcular();
-                    lblDisplay.Text = _model.Resultado.ToString();
-                }
+                _ultimoNumero1 = double.Parse(lblDisplay.Text, System.Globalization.CultureInfo.InvariantCulture);
+                _model.Expressao += lblDisplay.Text + texto;
 
-                _model.Numero1 = double.Parse(lblDisplay.Text);
-                _model.Operador = texto == "×" ? "*" : texto == "÷" ? "/" : texto == "−" ? "-" : "+";
-                _digitandoSegundo = true;
-                lblHistorico.Text = _model.Numero1 + " " + texto;
+                lblHistorico.Text = _model.Expressao;
+
                 lblDisplay.Text = "";
+
+                _digitandoSegundo = true;
             }
-            // IGUAL
             else if (texto == "=")
             {
-                if (lblDisplay.Text == "" || !_digitandoSegundo) return;
+                if (lblDisplay.Text == "")
+                    return;
 
-                _model.Numero2 = double.Parse(lblDisplay.Text);
-                lblHistorico.Text = _model.Numero1 + " " + _model.Operador + " " + _model.Numero2 + " =";
-                _model.Calcular();
+               
+                _model.Expressao += lblDisplay.Text;
 
-                double resultado = _model.Resultado;
-                lblDisplay.Text = resultado.ToString();
+                try
+                {
+                    double resultado = Math.Round(_model.CalcularExpressao(), 10);
 
-                // guarda o resultado para próxima operação
-                _model = new CalculadoraModel();
-                _model.Numero1 = resultado;
+                    if (double.IsNaN(resultado) || double.IsInfinity(resultado))
+                    {
+                        lblDisplay.Text = "Erro";
+                        _model.Expressao = "";
+                    }
+                    else
+                    {
+                        if (Math.Abs(resultado) > 999999999999999)
+                            lblDisplay.Text = resultado.ToString("0.#####E+0");
+                        else
+                            lblDisplay.Text = resultado.ToString("0.##########");
 
-                _digitandoSegundo = false;
-                _acabouDeCalcular = true;
-                lblHistorico.Text = "";
+                        AjustarFonte();
+                        lblHistorico.Text = _model.Expressao + " =";
+                        _model.Expressao = "";
+                        _acabouDeCalcular = true;
+                        _digitandoSegundo = false;
+                    }
+                }
+                catch
+                {
+                    lblDisplay.Text = "Erro";
+                }
             }
-            // LIMPAR
             else if (texto == "AC")
             {
                 _model = new CalculadoraModel();
@@ -79,39 +123,58 @@ namespace mobCalc
                 lblDisplay.Text = "0";
                 lblHistorico.Text = "";
             }
-            // BACKSPACE
+            
             else if (texto == "⌫")
             {
                 if (lblDisplay.Text.Length > 1)
                     lblDisplay.Text = lblDisplay.Text.Substring(0, lblDisplay.Text.Length - 1);
                 else
                     lblDisplay.Text = "0";
-
-                if (lblHistorico.Text.Length > 0)
-                    lblHistorico.Text = lblHistorico.Text.Substring(0, lblHistorico.Text.Length - 1);
             }
+            
             else if (texto == ".")
             {
                 if (!lblDisplay.Text.Contains("."))
-                    lblDisplay.Text += ".";
+                {
+                    if (lblDisplay.Text == "" || lblDisplay.Text == "0")
+                        lblDisplay.Text = "0.";
+                    
+                    else
+                        lblDisplay.Text += ".";
+                }
             }
+            
             else if (texto == "%" || texto == "+/-")
             {
                 if (lblDisplay.Text == "" || lblDisplay.Text == "0") return;
 
-                double numeroAtual = double.Parse(lblDisplay.Text);
-
+                double numeroAtual = double.Parse(lblDisplay.Text, System.Globalization.CultureInfo.InvariantCulture);
+                
                 if (texto == "+/-")
                 {
-                    lblDisplay.Text = (numeroAtual * -1).ToString();
-                    _acabouDeCalcular = false; // permite continuar editando
+                    lblDisplay.Text = (numeroAtual * -1).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    _acabouDeCalcular = false;
                 }
+
                 else
                 {
-                    _model.Numero1 = numeroAtual;
-                    _model.TipoCalculo = "porcentagem";
-                    _model.CalcularEspecial();
-                    lblDisplay.Text = _model.Resultado.ToString();
+                    double numero2 = double.Parse(lblDisplay.Text, System.Globalization.CultureInfo.InvariantCulture);
+                    double porcentagem;
+
+                    if (_digitandoSegundo)
+                    {
+                        porcentagem = _ultimoNumero1 * (numero2 / 100);
+                    }
+                    else
+                    {
+                        porcentagem = numero2 / 100;
+                    }
+
+                    lblDisplay.Text = Math.Round(porcentagem, 10).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    _model.Expressao = ""; // limpa a expressão!
+                    _digitandoSegundo = false;
+                    _acabouDeCalcular = true;
+                    AjustarFonte();
                 }
             }
         }
